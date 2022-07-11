@@ -1,0 +1,102 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "description": "custom page base vue3 & wya-vc.next",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "cross-env NODE_ENV=developnent node --max_old_space_size=8192 ./scripts/dev.js",
+    "build": "cross-env NODE_ENV=production node --max_old_space_size=8192 ./scripts/build.js",
+    "bootstrap": "lerna clean --yes && lerna bootstrap --loglevel silly",
+    "link": "lerna link",
+    "pub": "npm run build && lerna publish",
+    "pub:no-tag": "npm run pub -- --no-git-tag-version",
+    "lint": "esw packages --ext .vue,.js,.ts,.jsx,.tsx,.md --color",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:watch": "npm run lint -- --watch --fix",
+    "lint:style": "stylelint --fix '{packages}/**/*.{vue,css,scss}' --cache --cache-location node_modules/.cache/stylelint/",
+    "test": "node scripts/unit-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wya-team/wya-vm.next.git"
+  },
+  "author": "wya-team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wya-team/wya-vm.next/issues"
+  },
+  "homepage": "https://github.com/wya-team/wya-vm.next#readme",
+  "peerDependencies": {
+    "@babel/runtime": "~",
+    "@wya/vc": "3.x.x",
+    "vue": "3.2.x"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.17.2",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-replace": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue-jsx": "^1.3.5",
+    "@wya/http": "^1.5.1",
+    "@wya/utils": "^1.6.5",
+    "@wya/vc": "^3.0.0-alpha.51",
+    "cross-env": "^7.0.3",
+    "cssnano": "^5.0.17",
+    "echarts": "^5.3.0",
+    "ejs": "^3.1.6",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-jsdoc": "^36.0.7",
+    "eslint-plugin-markdown": "^2.2.0",
+    "eslint-plugin-vue": "^7.16.0",
+    "eslint-watch": "^7.0.0",
+    "fs-extra": "^10.0.0",
+    "html2canvas": "^1.4.1",
+    "husky": "^4.3.8",
+    "inquirer": "^8.2.0",
+    "inquirer-autocomplete-prompt": "^1.4.0",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.1.2",
+    "photoswipe": "^4.1.3",
+    "postcss": "^8.4.7",
+    "postcss-nested": "^5.0.6",
+    "postcss-preset-env": "^7.3.3",
+    "postcss-simple-vars": "^6.0.3",
+    "quill": "^1.3.7",
+    "rollup": "^2.67.2",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.49.7",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "typescript": "^4.5.2",
+    "upath": "^2.0.1",
+    "vite": "^2.8.1",
+    "vue": "^3.2.31"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "node ./scripts/commit-lint"
+    }
+  },
+  "lint-staged": {
+    "{packages}/**/*.{vue,js,ts,jsx,tsx,md}": [
+      "esw --ext '.vue,.js,.ts,.jsx,.tsx,.md' --fix",
+      "git add"
+    ],
+    "{packages}/**/*.{css,scss,vue}": [
+      "stylelint --fix",
+      "git add"
+    ]
+  }
+}

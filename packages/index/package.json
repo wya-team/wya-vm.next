@@ -1,0 +1,12 @@
+{
+  "name": "@wya/vm",
+  "version": "3.0.0-alpha.1",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@wya/vm-drag": "*"
+  }
+}
