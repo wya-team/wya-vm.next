@@ -77,7 +77,11 @@ class Builder {
 }
 
 const directory = path.resolve(__dirname, '../packages/');
-fs.readdirSync(directory).reduce((preProcess, file) => {
+const files = ['shared', ...fs.readdirSync(directory)]
+	.filter((i, index, source) => !['index', 'core'].includes(i) && source.indexOf(i) === index);
+
+// 打包顺序调整
+[...files, 'core', 'index'].reduce((preProcess, file) => {
 	const fullpath = path.resolve(directory, file);
 	// 获取文件信息
 	const stat = fs.statSync(fullpath);

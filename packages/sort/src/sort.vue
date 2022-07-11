@@ -44,7 +44,7 @@
 
 <script setup>
 import { getCurrentInstance, ref, onUnmounted } from 'vue';
-import { isPassiveSupported, eleInRegExp } from './utils';
+import { isPassiveSupported, eleInRegExp } from '@wya/vm-shared';
 import { useCurrentDrag } from './shared-hooks';
 
 const emit = defineEmits([
@@ -259,7 +259,7 @@ defineExpose({
 	position: relative;
 	padding: 0;
 	box-sizing: border-box;
-	transition: opacity 0.5s; // 目的是让拖拽的那个元素保持不透明， 文档流里透明
+	transition: opacity 0.5s; /* 目的是让拖拽的那个元素保持不透明， 文档流里透明 */
 	user-select: none;
 
 	&:hover {
@@ -276,7 +276,8 @@ defineExpose({
 			z-index: 2;
 			padding: 0;
 			border: 1px dotted #5495f6;
-			// cursor: move;
+
+			/* cursor: move; */
 		}
 	}
 
@@ -294,7 +295,6 @@ defineExpose({
 .vm-sortable__delete {
 	position: absolute;
 	top: 0;
-	right: 0;
 	right: 0;
 	z-index: 300;
 	width: 20px;

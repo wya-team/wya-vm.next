@@ -1,5 +1,5 @@
 {
-  "name": "@wya/vm-sort",
+  "name": "@wya/vm-shared",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
@@ -12,8 +12,5 @@
   },
   "devDependencies": {
     "@vue/test-utils": "^2.0.0-rc.17"
-  },
-  "dependencies": {
-    "@wya/vm-shared": "*"
   }
 }

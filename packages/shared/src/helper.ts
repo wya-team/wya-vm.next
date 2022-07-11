@@ -1,3 +1,5 @@
+import { DEBUG } from './constants';
+
 /**
  * 是否符合条件
  * 
@@ -32,9 +34,17 @@ export const isPassiveSupported = (() => {
 				return;
 			}
 		});
+		// @ts-ignore
 		window.addEventListener('test', null, opts);
 	} catch (err) {
 		console.log(err);
 	}
 	return status;
 })();
+
+export const Logger = {
+	...console,
+	debug: (...rest) => {
+		DEBUG && console.log(`%c [@wya/vm]`, 'color: red; font-weight: bold', ...rest);
+	}
+};

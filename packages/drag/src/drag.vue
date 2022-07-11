@@ -50,8 +50,8 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick, getCurrentInstance } from 'vue';
+import { isPassiveSupported, eleInRegExp } from '@wya/vm-shared';
 import { usePressShiftStatus } from './shared-hooks.ts';
-import { isPassiveSupported, eleInRegExp } from './utils.ts';
 
 const emit = defineEmits([
 	'delete',
@@ -689,7 +689,8 @@ $url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30
 	.is-events-none {
 		pointer-events: none;
 	}
-	// 重复？
+
+	/* 重复？ */
 	.is-delete {
 		position: absolute;
 		right: 0;
@@ -717,7 +718,8 @@ $url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30
 		z-index: 2;
 		padding: 0;
 		border: 1px dotted #5495f6;
-		// cursor: move;
+
+		/* cursor: move; */
 		.vm-draggable__handle {
 			display: block;
 		}
