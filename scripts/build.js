@@ -41,7 +41,7 @@ class Builder {
 					'photoswipe',
 					'quill',
 					'html2canvas',
-					/^@wya\/vcc-/
+					/^@wya\/vm-/
 				],
 				plugins: [
 					vuePlugin(),
@@ -68,7 +68,7 @@ class Builder {
 				]
 			});
 			await builder.write({ output });
-			console.log('Success!');
+			console.log(input + ' Success!');
 		} catch (e) {
 			console.log('Error!', e);
 			throw e;

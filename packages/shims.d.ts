@@ -13,10 +13,5 @@ declare module '*.vue' {
 	export const Popup: any;
 }
 
-declare module '@wya/vcc*' {
-	import { defineComponent } from 'vue'; // eslint-disable-line
-
-	const Component: ReturnType<typeof defineComponent>;
-	export default Component;
-}
+declare module '@wya/vm*'
 
