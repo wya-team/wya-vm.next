@@ -1,4 +1,4 @@
-import Drag from './drag.vue';
+import Drag from './src/drag.vue';
 
 export {
 	Drag

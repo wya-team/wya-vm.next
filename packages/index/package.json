@@ -7,6 +7,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@wya/vm-drag": "*"
+    "@wya/vm-drag": "*",
+    "@wya/vm-core": "*",
+    "@wya/vm-assist": "*",
+    "@wya/vm-widget": "*"
   }
 }
