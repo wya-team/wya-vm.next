@@ -50,6 +50,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick, getCurrentInstance } from 'vue';
+import { usePressShiftStatus } from './shared-hooks.ts';
 import { isPassiveSupported, eleInRegExp } from './utils.ts';
 
 const emit = defineEmits([
@@ -233,17 +234,7 @@ const draggableEvents = {
 	end: ['touchend', 'touchcancel', 'mouseup']
 };
 
-let isPressShift = false;
-if (!IS_SERVER) {
-	doc.addEventListener('keydown', (e) => {
-		isPressShift = e.keyCode === 16 || e.key === 'Shift';
-	});
-	doc.addEventListener('keyup', (e) => {
-		if (isPressShift && (e.keyCode === 16 || e.key === 'Shift')) {
-			isPressShift = false;
-		}
-	});
-}
+let isPressShift = usePressShiftStatus();
 
 let parentX = 0;
 let parentY = 0;
@@ -529,7 +520,7 @@ const handleMove = (e) => {
 			elmW = axisX - elmX;
 		}
 		// 控制一个方向
-		if (isPressShift) { 
+		if (isPressShift.value) { 
 			elmH = (elmW / props.w) * props.h;
 		}
 		!props.disabled && sync({
@@ -676,6 +667,9 @@ onUnmounted(() => {
 	operateDOMEvents('remove');
 });
 
+defineExpose({
+	setActived
+});
 </script>
 
 <style lang="scss">
@@ -912,7 +906,6 @@ $url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30
 .vm-draggable__delete {
 	position: absolute;
 	top: 0;
-	right: 0;
 	right: 0;
 	z-index: 300;
 	width: 20px;
