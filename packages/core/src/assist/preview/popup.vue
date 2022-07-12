@@ -10,7 +10,7 @@
 		</transition>
 		<transition :name="animate">
 			<div v-show="isActive" class="vm-assist-preview-popup__content">
-				<component :is="componentType" ref="htmlImg">
+				<component :is="componentType" ref="htmlImage">
 					<Preview
 						:style="styles"
 						:data-source="dataSource" 
@@ -24,9 +24,11 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue';
 import { HtmlImage } from '@wya/vc';
 import Preview from './preview.vue';
 
+const emit = defineEmits(['portal-fulfilled', 'portal-rejected']);
 const props = defineProps({
 	dataSource: Array,
 	styles: {
@@ -58,6 +60,7 @@ const props = defineProps({
 });
 
 const isActive = ref(false);
+const htmlImage = ref(null);
 const useImageMode = computed(() => {
 	return props.expect === 'image' || props.expect === 'download';
 });
@@ -79,22 +82,33 @@ const popupStyle = computed(() => {
 const generateImage = async () => {
 	if (props.expect !== 'image') return;
 	try {
-		const res = await this.$refs.htmlImg.getImage(this.imageOpts || {});
+		const res = await htmlImage.value.getImage(props.imageOptions || {});
 
-		isActive.value = false;
 		emit('portal-fulfilled', res);
-	} catch (e) {
 		isActive.value = false;
-		emit('portal-reject', res);
+	} catch (e) {
+		emit('portal-rejected');
+		isActive.value = false;
 	}
+};
+
+// TODO
+const download = () => {
+
 };
 
 const handleClose = () => {
 	isActive.value = false;
 	setTimeout(() => {
-		emit('portal-reject', res);
+		emit('portal-rejected');
 	}, 300); // 动画时间
 };
+
+onMounted(() => {
+	isActive.value = true;
+	generateImage();
+	download();
+});
 
 defineExpose({
 	generateImage

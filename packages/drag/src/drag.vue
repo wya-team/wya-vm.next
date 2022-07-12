@@ -70,6 +70,7 @@ const emit = defineEmits([
 	'update:y',
 	'update:z',
 	'update:w',
+	'update:h',
 	'update:r'
 ]);
 

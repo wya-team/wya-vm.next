@@ -32,6 +32,7 @@ import { onMounted, onUnmounted, ref, getCurrentInstance, computed } from 'vue';
 import { Icon } from '@wya/vc';
 import { RIGHT_MENU_MAP, RIGHT_MENU_NAME_MAP, RIGHT_MENU_ICON_MAP } from '../../../utils/constants';
 
+const emit = defineEmits(['portal-fulfilled', 'portal-rejected']);
 const props = defineProps({
 	event: MouseEvent,
 	dataSource: {
@@ -57,7 +58,7 @@ const instance = getCurrentInstance();
 const isActive = ref(false);
 const wrapHeight = ref(175);
 const menuName = ref(RIGHT_MENU_NAME_MAP);
-const menu = ref(Object.keys(RIGHT_MENU_MAP).map((key) => RIGHT_MENU_MAP[key]).filter(this.filter));
+const menu = ref(Object.keys(RIGHT_MENU_MAP).map((key) => RIGHT_MENU_MAP[key]).filter(props.filter));
 
 const top = computed(() => {
 	return (window.innerHeight - props.event.clientY) < wrapHeight.value

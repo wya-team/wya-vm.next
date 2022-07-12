@@ -5,12 +5,12 @@
 			<InputNumber
 				:model-value="$attrs.w"
 				style="width: 88px; margin-right: 23px;"
-				@input="handleChange(arguments[0], 'w')"
+				@input="e => handleChange(e, 'w')"
 			/>
 			<InputNumber
 				v-model="$attrs.h"
 				style="width: 88px;"
-				@input="handleChange(arguments[0], 'h')"
+				@input="e => handleChange(e, 'h')"
 			/>
 		</div>
 	</div>

@@ -496,15 +496,15 @@ const getImage = (opts = {}) => {
 			dataSource: cloneDeep(states.rebuildData),
 			styles: {
 				...props.frameStyle,
-				width: props.rebuildFrameW === 0 ? 'auto' : `${props.rebuildFrameW}px`,
-				height: props.rebuildFrameH === 0 ? 'auto' : `${props.rebuildFrameH}px`
+				width: states.rebuildFrameW === 0 ? 'auto' : `${states.rebuildFrameW}px`,
+				height: states.rebuildFrameH === 0 ? 'auto' : `${states.rebuildFrameH}px`
 			},
 			className: 'vm-combo__frame',
 
 			expect: 'image',
 			imageOptions: opts,
-			onSure: resolve,
-			onClose: reject,
+			onFulfilled: resolve,
+			onRejected: reject,
 			mode: props.mode,
 			modules: modulesMap.value
 		});
@@ -519,14 +519,15 @@ const preview = () => {
 		});
 		return false;
 	}
-	previewManager.popup({
+	PreviewManager.popup({
 		dataSource: cloneDeep(states.rebuildData),
 		styles: {
 			...props.frameStyle,
 			width: states.rebuildFrameW === 0 ? 'auto' : `${states.rebuildFrameW}px`,
 			height: states.rebuildFrameH === 0 ? 'auto' : `${states.rebuildFrameH}px`
 		},
-		className: 'vm-combo__frame'
+		className: 'vm-combo__frame',
+		modules: modulesMap.value
 	});
 
 	return true;

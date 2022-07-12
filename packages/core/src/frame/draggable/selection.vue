@@ -62,11 +62,11 @@ const wrapperStyle = computed(() => {
 		left: `${borderSize.left}px`,
 	};
 });
-const zIndexStyle = () => {
+const zIndexStyle = computed(() => {
 	return {
 		zIndex: dragging.value ? 2 : 1
 	};
-};
+});
 /**
  * https://www.w3school.com.cn/svg/svg_path.asp
  * 它开始于位置 M 坐标，到达位置 L，然后从那里开始到 L，最后在 L 关闭路径。

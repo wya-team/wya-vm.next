@@ -419,6 +419,9 @@ onUnmounted(() => {
 	operateDOMEvents('remove');
 });
 
+defineExpose({
+	guideSize
+});
 </script>
 
 <style lang="scss">
