@@ -1,6 +1,6 @@
 {
   "name": "@wya/vm",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "publishConfig": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@wya/vm-assist": "^1.0.1",
-    "@wya/vm-core": "^1.0.1",
+    "@wya/vm-core": "^1.0.2",
     "@wya/vm-drag": "^1.0.1",
     "@wya/vm-widget": "^1.0.1"
   }
