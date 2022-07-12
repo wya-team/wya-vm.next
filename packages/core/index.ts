@@ -1,5 +1,4 @@
 import Combo from './src/combo.vue';
+import { Preview, PreviewManager } from './src/assist/preview';
 
-export const createVMDrags = '';
-
-export { Combo };
+export { Combo, Preview, PreviewManager };
