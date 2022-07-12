@@ -25,7 +25,7 @@
 
 <script setup>
 import { HtmlImage } from '@wya/vc';
-import Preview from './preview';
+import Preview from './preview.vue';
 
 const props = defineProps({
 	dataSource: Array,

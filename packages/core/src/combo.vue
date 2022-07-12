@@ -5,7 +5,7 @@
 			:style="widgetStyle" 
 			:content-style="widgetContentStyle" 
 			:theme="theme"
-			:modules="modules"
+			:modules="modulesMap"
 			v-bind="widgetOptions"
 			@change="handleWidgetChange"
 		/>
@@ -21,7 +21,7 @@
 			:show-zoom-bar="showZoomBar"
 			:show-thumbnail="showThumbnail"
 			:theme="theme"
-			:modules="modules"
+			:modules="modulesMap"
 			v-bind="frameOptions"
 			@activated="handleActivated"
 			@deactivated="handleDeactivated"
@@ -43,7 +43,7 @@
 			:style="editorStyle"
 			:width="editorW"
 			:height="editorH"
-			:modules="modules"
+			:modules="modulesMap"
 			v-bind="editorOptions"
 			@change="handleChange"
 		/>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { provide, computed, watch, ref, getCurrentInstance } from 'vue';
+import { provide, computed, watch, ref, getCurrentInstance, nextTick } from 'vue';
 import { Logger } from '@wya/vm-shared';
 import { Store, useStates } from './store';
 import { PreviewManager, useKeyboard } from './assist';
@@ -135,7 +135,7 @@ const props = defineProps({
 		default: true
 	},
 	modules: {
-		type: Object,
+		type: [Object, Array],
 		default: () => ({})
 	},
 	mode: {
@@ -185,6 +185,15 @@ const classes = computed(() => {
 	return {
 		'vm-combo__theme--dark': props.theme === 'dark'
 	};
+});
+
+const modulesMap = computed(() => {
+	return Array.isArray(props.modules) 
+		? props.modules.reduce((pre, cur) => {
+			pre[cur.module] = cur;
+			return pre;
+		}, {})
+		: props.modules;
 });
 
 const syncData = () => {
@@ -457,11 +466,10 @@ const save = () => {
 		});
 		return false;
 	}
-	const { modules } = props;
 	for (let i = 0; i < data.length; i++) {
 		let { module: mod } = data[i];
-		if (modules[mod].dataValidity) {
-			let error = modules[mod].dataValidity(data[i]);
+		if (modulesMap.value[mod].dataValidity) {
+			let error = modulesMap.value[mod].dataValidity(data[i]);
 			if (error) {
 				let msg = error.msg || error.message || error.error || error; // 兼容验证器使用
 				emit('error', { 
@@ -498,7 +506,7 @@ const getImage = (opts = {}) => {
 			onSure: resolve,
 			onClose: reject,
 			mode: props.mode,
-			modules: props.modules
+			modules: modulesMap.value
 		});
 	});
 };
@@ -567,7 +575,10 @@ const upload = () => {
 watch(
 	() => props.modelValue,
 	(v) => {
-		store.commit('INIT', v);
+		// 首次加载时, defineExpose还未执行
+		nextTick(() => {
+			store.commit('INIT', v);
+		});
 	},
 	{
 		deep: true,
@@ -596,7 +607,8 @@ defineExpose({
 	preview,
 	download,
 	upload,
-	clipboardData
+	clipboardData,
+	modulesMap
 });
 </script>
 
