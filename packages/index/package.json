@@ -10,6 +10,7 @@
     "@wya/vm-assist": "^1.0.1",
     "@wya/vm-core": "^1.0.2",
     "@wya/vm-drag": "^1.0.1",
+    "@wya/vm-sort": "^1.0.1",
     "@wya/vm-widget": "^1.0.1"
   }
 }
