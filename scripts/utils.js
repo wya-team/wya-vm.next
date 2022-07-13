@@ -1,4 +1,6 @@
 const os = require('os');
+const fs = require('fs-extra');
+const { resolve } = require('path');
 
 exports.host = (() => {
 	const ips = [];
@@ -13,3 +15,21 @@ exports.host = (() => {
 	}
 	return ips[0] || 'localhost';
 })();
+
+const nms = [
+	resolve(__dirname, '../node_modules'),
+	resolve(process.cwd(), './node_modules')
+	// ...module.paths
+];
+
+exports.resolvePackage = (source, options) => {
+	let $path = nms.find(i => fs.pathExistsSync(resolve(i, source)));
+
+	if (!$path) {
+		throw new Error(`@wya/vue-scaffold: 未找到${source}`);
+	}
+
+	let fullPath = resolve($path, source);
+
+	return options.read ? fs.readFileSync(fullPath) : fullPath;
+};

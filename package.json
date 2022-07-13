@@ -43,6 +43,7 @@
     "@vitejs/plugin-vue": "^2.2.0",
     "@vitejs/plugin-vue-jsx": "^1.3.5",
     "@wya/http": "^1.5.1",
+    "@wya/sass": "^1.2.0",
     "@wya/utils": "^1.6.5",
     "@wya/vc": "^3.0.0-alpha.51",
     "cross-env": "^7.0.3",

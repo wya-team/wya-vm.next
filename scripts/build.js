@@ -45,6 +45,15 @@ class Builder {
 				],
 				plugins: [
 					vuePlugin(),
+					{
+						name: 'scss-pre',
+						transform(code, id) {
+							if (!/scss/.test(id)) {
+								return;
+							}
+							return `@import "node_modules/@wya/sass/lib/mixins/index.scss";${code};`;
+						}
+					},
 					typescript({
 						include: [/\.tsx?$/, /\.vue\?.*?lang(\.|=)ts$/],
 					}),

@@ -5,7 +5,7 @@ const vueJsx = require('@vitejs/plugin-vue-jsx');
 const { resolve } = require('path');
 const Prompt = require('./dev/prompt');
 const Gen = require('./dev/gen');
-const { host } = require('./utils');
+const { host, resolvePackage } = require('./utils');
 
 const { log } = console;
 
@@ -29,7 +29,7 @@ const { log } = console;
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: ''
+					additionalData: resolvePackage("@wya/sass/lib/mixins/bem.scss", { read: true }),
 				}
 			}
 		}
