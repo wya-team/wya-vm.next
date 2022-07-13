@@ -206,7 +206,7 @@ let timer;
 
 // 拖拽元素进入目标元素头上的时候
 const handleDragEnter = (e) => {
-	if (props.draggable && currentDrag && currentDrag.value.__DRAGGABLE__ && e.target != currentDrag) { // 排序
+	if (props.draggable && currentDrag.value && currentDrag.value.__DRAGGABLE__ && e.target != currentDrag.value) { // 排序
 		if (props.index != currentDrag.value.__END_INDEX__) {
 			if (timer) return;
 			timer = setTimeout(() => {
@@ -249,6 +249,7 @@ onUnmounted(() => {
 
 
 defineExpose({
+	index: props.index,
 	setActived
 });
 

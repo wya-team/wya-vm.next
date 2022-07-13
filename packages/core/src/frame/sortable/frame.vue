@@ -71,7 +71,7 @@ const props = defineProps({
 });
 
 const instance = getCurrentInstance();
-const sort = ref(null);
+const sort = ref([]);
 const dragWaiting = ref(false);
 const scrollTop = ref(0);
 const vm = ref({

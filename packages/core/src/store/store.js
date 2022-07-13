@@ -223,7 +223,7 @@ class Store extends BaseWatcher {
 	 * @returns {object} ~
 	 */
 	_makeRebuildData(source) {
-		let { modulesMap } = this.combo.proxy;
+		let { modulesMap } = this.combo.exposed;
 		let result = cloneDeep(source).map((it) => {
 			let { data = {}, rebuilder = {} } = modulesMap[it.module] || {};
 
