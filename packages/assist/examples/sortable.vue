@@ -17,7 +17,6 @@
 				取消撤回
 			</vc-button>
 		</div>
-
 		<!-- <vm-preview :data-source="list"/> -->
 		<vm-combo 
 			ref="combo"
@@ -47,14 +46,14 @@
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Message, Utils, Button as VcButton } from '@wya/vc';
 import { Combo as VmCombo } from '@wya/vm';
-import { defaultModules } from './modules/root';
+import { defaultModules } from './sortable-modules/root';
 
 const { Resize } = Utils;
 
 const list = ref([
 	{
 		id: String(Math.random()),
-		module: 'page',
+		module: 'page'
 	}
 ]);
 

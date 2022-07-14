@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-	
 const emit = defineEmits(['change']);
 defineProps({
 	w: Number,
