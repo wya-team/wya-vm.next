@@ -7,6 +7,8 @@
 				style="width: 88px; margin-right: 23px;"
 				@input="e => handleChange(e, 'w')"
 			/>
+
+			<!-- 使用v-model会提示它是个readonly, 尽量不使用v-model, 这里直接改成呢个model-value是一样的, 因为修改数值始终通过change事件 -->
 			<InputNumber
 				v-model="$attrs.h"
 				style="width: 88px;"

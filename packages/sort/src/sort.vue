@@ -250,6 +250,7 @@ onUnmounted(() => {
 
 defineExpose({
 	index: props.index,
+	isHighlight,
 	setActived
 });
 

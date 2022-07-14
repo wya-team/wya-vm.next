@@ -134,9 +134,9 @@ const handleDrop = (e) => {
 	 */
 	if (sort.value) {
 		sort.value.forEach(($instance) => {
-			if ($instance.highlight === true) {
+			if ($instance.isHighlight === true) {
 				rowIndex = $instance.index + 1;
-				$instance.highlight = false;
+				$instance.isHighlight = false;
 			}
 		});
 	}

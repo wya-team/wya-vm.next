@@ -225,7 +225,7 @@ class Store extends BaseWatcher {
 	_makeRebuildData(source) {
 		let { modulesMap } = this.combo.exposed;
 		let result = cloneDeep(source).map((it) => {
-			let { data = {}, rebuilder = {} } = modulesMap[it.module] || {};
+			let { data = {}, rebuilder = {} } = modulesMap.value[it.module] || {};
 
 			typeof data === 'function' && (data = data());
 			typeof rebuilder === 'function' && (rebuilder = rebuilder());
