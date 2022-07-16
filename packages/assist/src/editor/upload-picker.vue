@@ -17,6 +17,7 @@
 import { watch, ref } from 'vue';
 import { UploadPicker } from '@wya/vc';
 
+const emit = defineEmits(['change', 'update:modelValue']);
 const props = defineProps({
 	modelValue: {
 		type: Array,
@@ -76,10 +77,11 @@ watch(
 
 $block: vm-editor-upload-picker;
 $c51: #515151;
+
 @include block($block) {
-	@include element(tip){
+	@include element(tip) {
 		font-size: 12px;
-		color: #999999;
+		color: #999;
 	}
 }
 </style>
