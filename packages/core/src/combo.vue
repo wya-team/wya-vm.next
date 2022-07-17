@@ -69,7 +69,9 @@ const emit = defineEmits([
 	'widget-change',
 	'sort-end',
 	'error',
-	'save'
+	'save',
+	'activated',
+	'deactivated'
 ]);
 
 const props = defineProps({
@@ -204,10 +206,12 @@ const syncData = () => {
 // draggable
 const handleActivated = (e, it) => {
 	store.resetCurrentEditor(it);
+	emit('activated', it);
 };
 
-const handleDeactivated = () => {
+const handleDeactivated = (e, it) => {
 	store.resetCurrentEditor();
+	emit('deactivated', it);
 };
 
 // 用户处理widget出来的数据 TODO: 支持记忆片段
