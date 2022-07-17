@@ -7,12 +7,13 @@
 		<div class="vm-editor__wrapper">
 			<!-- <div class="vm-editor__arrow" /> -->
 			<template v-if="currentValue.module !== SELECTION_MODULE">
-				<!-- vm-type让组件内部处理如何渲染或其他操作 -->
+				<!-- vm-type让组件内部处理如何渲染或其他操作, draggble为了inheritAttrs的影响 -->
 				<component
 					:is="modules[currentValue.module].Editor"
 					ref="target"
 					:key="currentValue.id"
 					v-bind="currentValue"
+					:draggable="false"
 					@change="handleChange"
 				/>
 			</template>
