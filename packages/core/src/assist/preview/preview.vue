@@ -39,7 +39,10 @@ import { SELECTION_MODULE } from '../../utils/constants';
 
 const props = defineProps({
 	dataSource: Array,
-	mode: String,
+	mode: {
+		type: String,
+		default: 'draggable'
+	},
 	frameW: Number,
 	modules: Object
 });

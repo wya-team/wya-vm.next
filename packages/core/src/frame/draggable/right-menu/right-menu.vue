@@ -84,7 +84,7 @@ const handleDeselect = (e) => {
 
 	if (!inArea) {
 		isActive.value = false;
-		emit('portal-rejected', item);
+		emit('portal-rejected');
 	}
 };
 

@@ -144,7 +144,6 @@ const props = defineProps({
 		type: String,
 		default: 'draggable'
 	},
-
 	keyboardEnabled: {
 		type: Boolean,
 		default: false

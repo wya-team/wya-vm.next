@@ -443,7 +443,7 @@ const setActivedById = (id) => {
 
 // 显示菜单
 const handleShowMenu = async (e, it) => { 
-	const { clipboardData } = combo.proxy;
+	const { clipboardData } = combo.exposed;
 	if (!clipboardData && it.module === PAGE_MOULE) return;
 
 	try {
@@ -498,7 +498,7 @@ const handleShowMenu = async (e, it) => {
 			if (
 				oldSortIds.every((id, index) => props.dataSource[index].id === id)
 			) {
-				combo.proxy.store.removeHistory(it.selections.length + 1);
+				combo.exposed.store.removeHistory(it.selections.length + 1);
 
 				emit('error', {
 					type: 'menu',
@@ -557,7 +557,7 @@ const selectMenu = (e, type, it, invoke = true) => {
 		case DELETE:
 			action = { type: 'DELETE', id: it.id };
 			if (!invoke) return action;
-			combo.proxy.remove(it, true);
+			combo.exposed.remove(it, true);
 			return;
 		// 取消选择：直接删除元素
 		case SELECTION:
@@ -571,7 +571,7 @@ const selectMenu = (e, type, it, invoke = true) => {
 			emit('change', action);
 			return;
 		case COPY: 
-			combo.proxy.copy(it);
+			combo.exposed.copy(it);
 			return;
 		case PASTE: {
 			let { x, y } = content.value.getBoundingClientRect();
@@ -581,7 +581,7 @@ const selectMenu = (e, type, it, invoke = true) => {
 
 			x = Math.round((mouseX - x) / scale.value);
 			y = Math.round((mouseY - y) / scale.value);
-			combo.proxy.paste({
+			combo.exposed.paste({
 				x,
 				y
 			});

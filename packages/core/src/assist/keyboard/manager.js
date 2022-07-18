@@ -27,7 +27,7 @@ class Keyboard {
 	}
 
 	init() {
-		this.frame = this.combo.proxy.frame;
+		this.frame = this.combo.exposed.frame;
 
 		this.operateDOMEvents('add');
 	}
@@ -58,28 +58,28 @@ class Keyboard {
 			// ctrl/command + z
 			if ((e.keyCode === 90 || e.key === 'z')) {
 				if (e.shiftKey) {
-					this.combo.proxy.redo();
+					this.combo.exposed.redo();
 				} else {
-					this.combo.proxy.undo();
+					this.combo.exposed.undo();
 				}
 				return;
 			}
 
 			// ctrl/command + c
 			if ((e.keyCode === 67 || e.key === 'c')) {
-				this.combo.proxy.copy();
+				this.combo.exposed.copy();
 				return;
 			}
 
 			// ctrl/command + x
 			if ((e.keyCode === 88 || e.key === 'x')) {
-				this.combo.proxy.cut();
+				this.combo.exposed.cut();
 				return;
 			}
 
 			// ctrl/command + v
 			if ((e.keyCode === 86 || e.key === 'v')) {
-				this.combo.proxy.paste();
+				this.combo.exposed.paste();
 				return;
 			}
 
