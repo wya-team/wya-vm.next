@@ -18,7 +18,7 @@
 				<template v-if="it.module !== SELECTION_MODULE">
 					<!-- vm-type让组件内部处理如何渲染或其他操作 -->
 					<component
-						:is="modules[it.module].Viewer" 
+						:is="modulesMap[it.module].Viewer" 
 						v-bind="it"
 						:vm="vm"
 						:index="index"
@@ -56,6 +56,15 @@ const scale = computed(() => {
 	return typeof props.frameW === 'undefined' 
 		? 1 
 		: window.innerWidth / props.frameW;
+});
+
+const modulesMap = computed(() => {
+	return Array.isArray(props.modules) 
+		? props.modules.reduce((pre, cur) => {
+			pre[cur.module] = cur;
+			return pre;
+		}, {})
+		: props.modules;
 });
 
 let isWatch = false;
