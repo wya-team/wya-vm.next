@@ -277,7 +277,7 @@ const remove = (it, force = false) => {
 	if (!id || (!force && states.editor.module === PAGE_MOULE)) {
 		emit('error', { 
 			type: 'id', 
-			msg: "请先选择操作对象" 
+			message: "请先选择操作对象" 
 		});
 		return;
 	}
@@ -414,7 +414,7 @@ const undo = () => {
 	if (current < 0) {
 		emit('error', { 
 			type: 'undo', 
-			msg: "目前已经是初始状态" 
+			message: "目前已经是初始状态" 
 		});
 		return;
 	}
@@ -440,7 +440,7 @@ const redo = () => {
 	if (current > states.total) {
 		emit('error', { 
 			type: 'undo', 
-			msg: "目前已经是最终状态" 
+			message: "目前已经是最终状态" 
 		});
 		return;
 	}
@@ -466,7 +466,7 @@ const save = () => {
 	if (data.length === 0) {
 		emit('error', { 
 			type: 'save', 
-			msg: `保存对象不能为空` 
+			message: `保存对象不能为空` 
 		});
 		return false;
 	}
@@ -478,7 +478,7 @@ const save = () => {
 				let msg = error.msg || error.message || error.error || error; // 兼容验证器使用
 				emit('error', { 
 					type: 'save', 
-					msg: `第${i + 1}个 - ${msg}`, 
+					message: `第${i + 1}个 - ${msg}`, 
 					index: i 
 				});
 				// 错误元素激活
@@ -519,7 +519,7 @@ const preview = () => {
 	if (states.rebuildData.length === 0) {
 		emit('error', { 
 			type: 'preview', 
-			msg: `预览数据对象不能为空` 
+			message: `预览数据对象不能为空` 
 		});
 		return false;
 	}

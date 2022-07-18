@@ -374,7 +374,7 @@ const handleDrop = (e) => {
 	if (result.max && result.max <= props.dataSource.filter(i => i.module === module).length) {
 		emit('error', {
 			type: 'create',
-			msg: `当前模块最多只能创建${result.max}个`
+			message: `当前模块最多只能创建${result.max}个`
 		});
 		return;
 	}
@@ -502,7 +502,7 @@ const handleShowMenu = async (e, it) => {
 
 				emit('error', {
 					type: 'menu',
-					msg: `您已经${type === TOP ? '置顶' : '置底'}, 无需操作`
+					message: `您已经${type === TOP ? '置顶' : '置底'}, 无需操作`
 				});
 			}
 			return;

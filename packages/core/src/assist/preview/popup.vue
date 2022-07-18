@@ -123,7 +123,7 @@ defineExpose({
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 999;
+	z-index: 1003;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -133,7 +133,7 @@ defineExpose({
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 997;
+	z-index: 1001;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(#000, 0.2);
@@ -144,7 +144,7 @@ defineExpose({
 
 .vm-assist-preview-popup__content {
 	position: relative;
-	z-index: 998;
+	z-index: 1002;
 	max-width: 100vw;
 	max-height: 100vh;
 	overflow: auto; /* 区域之外不形式 */
@@ -155,8 +155,9 @@ defineExpose({
 	position: absolute;
 	top: 30px;
 	right: 30px;
-	z-index: 999;
+	z-index: 1003;
 	font-size: 24px;
+	cursor: pointer;
 }
 
 .vm-fade-enter,

@@ -149,7 +149,7 @@ const handleDrop = (e) => {
 	if (result.max && result.max <= props.dataSource.filter(i => i.module === module).length) {
 		emit('error', {
 			type: 'create',
-			msg: `当前模块最多只能创建${result.max}个`
+			message: `当前模块最多只能创建${result.max}个`
 		});
 		return;
 	}
