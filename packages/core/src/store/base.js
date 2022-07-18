@@ -6,7 +6,7 @@ import Editor from './editor-mixin';
 class BaseWatcher {
 	constructor() {
 		this.states = reactive({
-			data: [],
+			data: []
 		});
 
 		this.onReady.forEach(fn => fn.call(this));

@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { provide, computed, watch, ref, getCurrentInstance, nextTick } from 'vue';
+import { provide, computed, watch, ref, getCurrentInstance } from 'vue';
 import { Logger } from '@wya/vm-shared';
 import { Store, useStates } from './store';
 import { PreviewManager, useKeyboard } from './assist';
@@ -577,25 +577,6 @@ const upload = () => {
 	};
 };
 
-watch(
-	() => props.modelValue,
-	(v) => {
-		// 首次加载时, defineExpose还未执行
-		nextTick(() => {
-			store.commit('INIT', v);
-		});
-	},
-	{
-		deep: true,
-		immediate: true,
-	}
-);
-
-provide('@wya/vm', {
-	getVM: () => instance,
-	getData: () => props.modelValue
-});
-
 defineExpose({
 	store,
 	VMComboId,
@@ -614,6 +595,23 @@ defineExpose({
 	upload,
 	clipboardData,
 	modulesMap
+});
+
+// 上面先执行后，因为immediate会立即执行，store内还不存在暴露的属性
+watch(
+	() => props.modelValue,
+	(v) => {
+		store.commit('INIT', v);
+	},
+	{
+		deep: true,
+		immediate: true,
+	}
+);
+
+provide('@wya/vm', {
+	getVM: () => instance,
+	getData: () => props.modelValue
 });
 </script>
 
