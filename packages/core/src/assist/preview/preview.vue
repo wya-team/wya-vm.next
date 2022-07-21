@@ -1,6 +1,6 @@
 <template>
 	<div class="vm-assist-preview">
-		<div style="position: relative;">
+		<div style="position: relative;" :style="frameSizeStyle">
 			<div 
 				v-for="(it, index) in dataSource" 
 				:key="it.id" 
@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { SELECTION_MODULE } from '../../utils/constants';
+import { SELECTION_MODULE, PAGE_MOULE } from '../../utils/constants';
 
 const props = defineProps({
 	dataSource: Array,
@@ -59,6 +59,15 @@ const scale = computed(() => {
 	return typeof props.frameW === 'undefined' 
 		? 1 
 		: window.innerWidth / props.frameW;
+});
+
+const frameSizeStyle = computed(() => {
+	if (!isDraggable.value) return {};
+	const it = props.dataSource.find(i => i.module === PAGE_MOULE) || {};
+	return {
+		width: `${it.w ? `${it.w * scale.value}px` : 'auto'}`, 
+		height: `${it.h ? `${it.h * scale.value}px` : 'auto'}`
+	};
 });
 
 const modulesMap = computed(() => {
