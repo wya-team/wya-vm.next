@@ -499,7 +499,7 @@ const save = () => {
  *
  * @param {object} opts ~
  */
-const change = (opts) => {
+const update = (opts) => {
 	if (typeof opts !== 'object') return;
 	const { id, history, ...rest } = opts;
 	const changed = getValidChanged(rest);
@@ -608,7 +608,7 @@ defineExpose({
 	undo,
 	redo,
 	save,
-	change,
+	update,
 	getImage,
 	preview,
 	download,

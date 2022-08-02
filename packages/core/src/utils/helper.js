@@ -48,6 +48,8 @@ export const getValidChanged = (target) => {
 			changed[key] = val;
 		}
 	}
+
+	return changed;
 };
 
 export const Mixins = (cls, ...list) => {
