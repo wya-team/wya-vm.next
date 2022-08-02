@@ -37,6 +37,19 @@ export const allowSelection = (a, b) => {
 	);
 };
 
+export const getValidChanged = (target) => {
+	const changed = {};
+	for (let key in target) {
+		let val = target[key];
+
+		['x', 'y', 'z', 'r', 'w', 'h'].includes(key) && (val = Number(val));
+
+		if (hasOwn(target, key) && !valueIsNaN(val)) {
+			changed[key] = val;
+		}
+	}
+};
+
 export const Mixins = (cls, ...list) => {
 	cls.prototype.onReady = cls.prototype.onReady ? [cls.prototype.onReady] : [];
 	for (let _cl of list) {

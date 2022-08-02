@@ -56,7 +56,7 @@ import { Logger } from '@wya/vm-shared';
 import { Store, useStates } from './store';
 import { PreviewManager, useKeyboard } from './assist';
 
-import { cloneDeep, getUid } from './utils/helper';
+import { cloneDeep, getUid, getValidChanged } from './utils/helper';
 import { PAGE_MOULE, SELECTION_MODULE } from './utils/constants';
 import Widget from './widget';
 import Editor from './editor';
@@ -493,6 +493,26 @@ const save = () => {
 	return true;
 };
 
+/**
+ * 外部能直接修改内部的值，且能记录历史
+ * id, history 这是内部字段
+ *
+ * @param {object} opts ~
+ */
+const change = (opts) => {
+	if (typeof opts !== 'object') return;
+	const { id, history, ...rest } = opts;
+	const changed = getValidChanged(rest);
+
+	handleChange({
+		type: 'UPDATE',
+		id,
+		changed,
+		// 是否记录历史
+		history
+	});
+};
+
 const getImage = (opts = {}) => {
 	return new Promise((resolve, reject) => {
 		PreviewManager.popup({
@@ -588,6 +608,7 @@ defineExpose({
 	undo,
 	redo,
 	save,
+	change,
 	getImage,
 	preview,
 	download,

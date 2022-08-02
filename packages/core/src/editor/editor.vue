@@ -27,7 +27,7 @@
 
 <script setup>
 import { computed, watch, ref } from 'vue';
-import { valueIsNaN, hasOwn, debounce } from "../utils/helper";
+import { getValidChanged, debounce } from "../utils/helper";
 import { SELECTION_MODULE } from "../utils/constants";
 
 const emit = defineEmits(['change']);
@@ -59,7 +59,7 @@ const resetCurEditor = debounce(function () {
 }, 10);
 
 /**
- * 从Viewer传递出来
+ * 从Editor传递出来
  * id 和 history 这是内部字段
  * 
  * @param {object} opts ~
@@ -67,17 +67,7 @@ const resetCurEditor = debounce(function () {
 const handleChange = (opts = {}) => {
 	if (typeof opts !== 'object') return;
 	const { id, history, ...rest } = opts;
-
-	const changed = {};
-	for (let key in rest) {
-		let val = rest[key];
-
-		['x', 'y', 'z', 'r', 'w', 'h'].includes(key) && (val = Number(val));
-
-		if (hasOwn(rest, key) && !valueIsNaN(val)) {
-			changed[key] = val;
-		}
-	}
+	const changed = getValidChanged(rest);
 
 	emit('change', {
 		type: 'UPDATE',

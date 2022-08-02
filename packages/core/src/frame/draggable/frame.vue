@@ -159,7 +159,7 @@ import Thumbnail from './thumbnail.vue';
 import Selection from './selection.vue';
 import RightMenu from './right-menu';
 import { getInstance } from '../../utils/get-instance';
-import { getUid, cloneDeep, valueIsNaN, hasOwn, allowSelection } from '../../utils/helper';
+import { getUid, cloneDeep, getValidChanged, allowSelection } from '../../utils/helper';
 import { WIDGET_TO_FRAME, PAGE_MOULE, RIGHT_MENU_MAP, SELECTION_MODULE } from '../../utils/constants';
 
 const { TOP, BOTTOM, UP, DOWN, DELETE, SELECTION, LOCK, COPY, PASTE } = RIGHT_MENU_MAP;
@@ -608,26 +608,16 @@ const selectMenu = (e, type, it, invoke = true) => {
  * id, history 这是内部字段
  *
  * @param {object} opts ~
- * @param {object} it ~
+ * @param {object} originalData ~
  */
-const handleAttrChange = (opts = {}, it) => {
+const handleAttrChange = (opts = {}, originalData = {}) => {
 	if (typeof opts !== 'object') return;
 	const { id, history, ...rest } = opts;
-
-	const changed = {};
-	for (let key in rest) {
-		let val = rest[key];
-
-		['x', 'y', 'z', 'r', 'w', 'h'].includes(key) && (val = Number(val));
-
-		if (hasOwn(rest, key) && !valueIsNaN(val)) {
-			changed[key] = val;
-		}
-	}
+	const changed = getValidChanged(rest);
 
 	emit('change', {
 		type: 'UPDATE',
-		id: id || it.id,
+		id: id || originalData.id,
 		changed,
 		// 是否记录历史
 		history
