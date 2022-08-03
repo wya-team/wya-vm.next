@@ -249,7 +249,7 @@ const handleChange = ({ type, ...payload }) => {
 
 // 模拟添加
 const add = (module, index) => {
-	frame.value.handleDrop({
+	const id = frame.value.handleDrop({
 		fake: true,
 		dataTransfer: {
 			getData: () => {
@@ -261,6 +261,8 @@ const add = (module, index) => {
 		}
 	}, true);
 	syncData();
+
+	return id;
 };
 
 /**

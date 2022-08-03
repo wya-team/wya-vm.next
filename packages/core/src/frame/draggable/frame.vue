@@ -417,6 +417,9 @@ const handleDrop = (e) => {
 
 	// 新元素处于激活状态
 	setActived(rowIndex);
+
+	// 给外层fake时add用的
+	return id;
 };
 
 /**
