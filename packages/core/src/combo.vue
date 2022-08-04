@@ -515,19 +515,29 @@ const update = (opts) => {
 	});
 };
 
-const getImage = (opts = {}) => {
+/**
+ * 
+ * 
+ * 部分样式不支持转换：https://html2canvas.hertzen.com/features
+ *
+ * @param {object} options ~
+ */
+const getImage = (options = {}) => {
 	return new Promise((resolve, reject) => {
+		const styles = {
+			...props.frameStyle
+		};
+
+		delete styles.width;
+		delete styles.height;
 		PreviewManager.popup({
 			dataSource: cloneDeep(states.rebuildData),
 			styles: {
-				...props.frameStyle,
-				width: states.rebuildFrameW === 0 ? 'auto' : `${states.rebuildFrameW}px`,
-				height: states.rebuildFrameH === 0 ? 'auto' : `${states.rebuildFrameH}px`
+				...props.frameStyle
 			},
 			className: 'vm-combo__frame',
-
 			expect: 'image',
-			imageOptions: opts,
+			imageOptions: options, // 如果图片质量要更大，需要设置{ scale: 2, width: 这个宽度要取画布的宽度 }
 			onFulfilled: resolve,
 			onRejected: reject,
 			mode: props.mode,
@@ -536,7 +546,7 @@ const getImage = (opts = {}) => {
 	});
 };
 
-const preview = () => {
+const preview = (options = {}) => {
 	if (states.rebuildData.length === 0) {
 		emit('error', { 
 			type: 'preview', 
@@ -544,13 +554,16 @@ const preview = () => {
 		});
 		return false;
 	}
+	const styles = {
+		...props.frameStyle
+	};
+
+	delete styles.width;
+	delete styles.height;
 	PreviewManager.popup({
+		...options,
 		dataSource: cloneDeep(states.rebuildData),
-		styles: {
-			...props.frameStyle,
-			width: states.rebuildFrameW === 0 ? 'auto' : `${states.rebuildFrameW}px`,
-			height: states.rebuildFrameH === 0 ? 'auto' : `${states.rebuildFrameH}px`
-		},
+		styles,
 		className: 'vm-combo__frame',
 		modules: modulesMap.value
 	});

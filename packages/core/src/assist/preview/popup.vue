@@ -14,6 +14,8 @@
 					<Preview
 						:style="styles"
 						:data-source="dataSource" 
+						:width="width"
+						:frame-w="frameW"
 						:mode="mode"
 						:modules="modules"
 					/>
@@ -49,14 +51,21 @@ const props = defineProps({
 		type: String,
 		default: 'draggable'
 	},
-
 	// download / image
 	expect: {
 		type: String,
 	},
 
 	imageOptions: Object,
-	modules: Object
+	modules: Object,
+
+	// preview.vue
+	width: {
+		type: [Number, String]
+	},
+	frameW: {
+		type: Number,
+	},
 });
 
 const isActive = ref(false);
@@ -136,7 +145,7 @@ defineExpose({
 	z-index: 1001;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(#000, 0.2);
+	background-color: rgba(#000, 0.5);
 
 	/* opacity: 0; */
 	transition: opacity 0.2s;

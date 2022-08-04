@@ -41,7 +41,7 @@
 			图片
 		</Button>
 	</div>
-	<div style="padding: 40px 20px 20px 20px">
+	<div style="padding: 40px 20px 20px 20px;">
 		<Combo 
 			ref="combo"
 			v-model="list"
@@ -68,6 +68,7 @@
 			</template>
 		</Combo>
 	</div>
+	<canvas ref="canvas" />
 </template>
 
 <script setup>
@@ -78,6 +79,7 @@ import { defaultModules } from './modules/root';
 
 const { Resize } = Utils;
 
+const canvas = ref();
 const list = ref([
 	{
 		id: `PAGE`,
@@ -109,8 +111,25 @@ const handleResize = () => {
 };
 
 const handleClick = async () => {
-	const res = await combo.value.getImage();
-	console.log(res);
+	let imageWidth = (list.value.find(i => i.module === 'page')?.w || 0) || undefined;
+	const res = await combo.value.getImage({
+		scale: 2,
+		width: imageWidth
+	});
+
+	let image = new Image();
+	image.src = res.base64Image;
+	image.onload = () => {
+		console.log(image.naturalWidth + 'x' + image.naturalHeight);
+	};
+
+	const url = URL.createObjectURL(res.file);
+	const link = document.createElement('a');
+	link.textContent = 'download image';
+	link.href = url;
+	link.download = 'image';
+	link.click();
+	URL.revokeObjectURL(url);
 };
 
 const handleSave = (response) => {

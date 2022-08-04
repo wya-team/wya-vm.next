@@ -1,5 +1,5 @@
 <template>
-	<div :style="[{ height: `${h ? `${h}px` : 'auto' }`, width: `${w ? `${w}px` : 'auto' }`, color: 'black' }]">
+	<div :style="[{ height: `100%`, width: `100%`, color: 'black' }]">
 		id: {{ id }} <br>
 		X: {{ x }} <br>
 		Y: {{ y }} <br>

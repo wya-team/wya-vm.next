@@ -1,6 +1,6 @@
 <template>
 	<div 
-		:style="[{ height: `${h ? `${h}px` : 'auto' }`, width: `${w ? `${w}px` : 'auto' }` }]"
+		:style="[{ height: `100%`, width: `100%` }]"
 		class="vm-basic-page-viewer"
 		@mousedown.left="handleSelectionMouseDown"
 	>
