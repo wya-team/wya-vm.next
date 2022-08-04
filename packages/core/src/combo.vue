@@ -537,7 +537,11 @@ const getImage = (options = {}) => {
 			},
 			className: 'vm-combo__frame',
 			expect: 'image',
-			imageOptions: options, // 如果图片质量要更大，需要设置{ scale: 2, width: 这个宽度要取画布的宽度 }
+			// 如果图片质量要更大，需要设置{ scale: 2, width: 这个宽度要取画布的宽度 }
+			imageOptions: {
+				width: states.rebuildFrameW || undefined,
+				...options
+			},
 			onFulfilled: resolve,
 			onRejected: reject,
 			mode: props.mode,
