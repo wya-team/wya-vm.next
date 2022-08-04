@@ -111,7 +111,7 @@ const handleResize = () => {
 };
 
 const handleClick = async () => {
-	let imageWidth = (list.value.find(i => i.module === 'page')?.w || 0) || undefined;
+	let imageWidth = list.value.find(i => i.module === 'page')?.w;
 	const res = await combo.value.getImage({
 		scale: 2,
 		width: imageWidth
