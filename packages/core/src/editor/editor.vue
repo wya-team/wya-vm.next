@@ -114,6 +114,7 @@ $block: vm-editor;
 		z-index: 2;
 		height: 100%;
 		padding: 0;
+		overflow: auto;
 		background: #fff;
 		border: 1px solid #0000001a;
 		border-radius: 0;

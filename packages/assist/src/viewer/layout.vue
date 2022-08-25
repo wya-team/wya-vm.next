@@ -71,14 +71,16 @@ const contentStyle = computed(() => {
 	} = parentAttrs.value || {};
 	
 	backgroundColor = backgroundColor || $backgroundColor || 'transparent';
-	backgroundImage = backgroundImage || $backgroundImage || '';
+	backgroundImage = (Array.isArray(backgroundImage) ? backgroundImage[0] : backgroundImage) 
+		|| (Array.isArray($backgroundImage) ? $backgroundImage[0] : backgroundImage) 
+		|| '';
 	backgroundSize = backgroundSize || $backgroundSize || 'cover';
 	borderRadius = borderRadius || $borderRadius || 0;
 	
 	return {
 		background: `${backgroundColor}`,
-		backgroundImage: backgroundImage && backgroundImage[0] 
-			? `url(${backgroundImage[0]})`
+		backgroundImage: backgroundImage 
+			? `url(${backgroundImage})`
 			: undefined,
 		backgroundSize,
 		borderRadius: !currentInner.value ? `${borderRadius}px` : undefined,
