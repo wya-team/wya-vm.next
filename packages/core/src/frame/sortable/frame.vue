@@ -75,7 +75,8 @@ const sort = ref([]);
 const dragWaiting = ref(false);
 const scrollTop = ref(0);
 const vm = ref({
-	type: 'frame'
+	type: 'frame',
+	getInstance: () => instance
 });
 
 const style = computed(() => {

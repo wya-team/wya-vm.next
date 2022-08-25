@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { computed, watch } from 'vue';
+import { computed, watch, getCurrentInstance } from 'vue';
 import { SELECTION_MODULE, PAGE_MOULE } from '../../utils/constants';
 
 const props = defineProps({
@@ -63,6 +63,8 @@ const props = defineProps({
 	modules: Object
 });
 
+const instance = getCurrentInstance();
+
 const isDraggable = computed(() => {
 	return props.mode === 'draggable';
 });
@@ -76,7 +78,8 @@ const scale = computed(() => {
 const vm = computed(() => {
 	return {
 		type: 'preview',
-		scale: scale.value
+		scale: scale.value,
+		getInstance: () => instance
 	};
 });
 

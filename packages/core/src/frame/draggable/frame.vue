@@ -215,7 +215,8 @@ const instance = getCurrentInstance();
 const combo = getInstance('combo', 'VMComboId');
 
 const vm = ref({
-	type: 'frame'
+	type: 'frame',
+	getInstance: () => instance
 });
 
 const scrollLeft = ref(0);
