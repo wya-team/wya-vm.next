@@ -1,6 +1,6 @@
 {
   "name": "@wya/vm-core",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "main": "dist/index.js",
   "license": "MIT",
   "publishConfig": {
