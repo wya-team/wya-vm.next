@@ -569,6 +569,7 @@ const preview = (options = {}) => {
 		dataSource: cloneDeep(states.rebuildData),
 		styles,
 		className: 'vm-combo__frame',
+		mode: props.mode,
 		modules: modulesMap.value
 	});
 
