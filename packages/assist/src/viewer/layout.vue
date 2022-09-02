@@ -62,7 +62,7 @@ const wrapperStyle = computed(() => {
 
 const contentStyle = computed(() => {
 	if (props.content) return props.content;
-	let { backgroundColor, backgroundImage, backgroundSize, borderRadius } = selfAttrs.value;
+	let { backgroundType, backgroundColor, backgroundImage, backgroundSize, borderRadius } = selfAttrs.value;
 	let { 
 		backgroundColor: $backgroundColor, 
 		backgroundImage: $backgroundImage, 
@@ -77,9 +77,12 @@ const contentStyle = computed(() => {
 	backgroundSize = backgroundSize || $backgroundSize || 'cover';
 	borderRadius = borderRadius || $borderRadius || 0;
 	
+	// 注意，如果有值，1表示纯色背景
+	const allowBackgroundImage = (typeof backgroundType === 'undefined' || backgroundType !== 1) 
+		&& backgroundImage;
 	return {
 		background: `${backgroundColor}`,
-		backgroundImage: backgroundImage 
+		backgroundImage: allowBackgroundImage 
 			? `url(${backgroundImage})`
 			: undefined,
 		backgroundSize,

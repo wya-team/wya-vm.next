@@ -32,6 +32,30 @@
 				@change="v => handleChange(v, 'content')"
 			/>
 		</EditorCell>
+		<EditorCell :label-width="100" label="卡片背景：" multiple>
+			<EditorRadio
+				:model-value="$attrs.backgroundType"
+				:data-source="radios"
+				@change="v => handleChange(v, 'backgroundType')"
+			/>
+			<div style="margin-top: 10px;">
+				<div v-show="$attrs.backgroundType == 1">
+					<EditorColor
+						:color="$attrs.backgroundColor"
+						default="#fff"
+						alpha
+						@change="v => handleChange(v, 'backgroundColor')"
+					/>
+				</div>
+				<div v-show="$attrs.backgroundType == 2">
+					<EditorUploadPicker
+						:model-value="$attrs.backgroundImage ? [$attrs.backgroundImage] : []"
+						tips="建议宽度750像素"
+						@change="v => handleChange(v[0], 'backgroundImage')"
+					/>
+				</div>
+			</div>
+		</EditorCell>
 	</EditorLayout>
 </template>
 
@@ -41,7 +65,9 @@ import {
 	EditorCell,
 	EditorLayout,
 	EditorSlider,
-	EditorInput
+	EditorInput,
+	EditorColor,
+	EditorUploadPicker
 } from "../../../src/editor";
 
 const emit = defineEmits(['change']);
@@ -56,6 +82,17 @@ const paddingRadios = [
 		value: 1,
 	}
 ];
+const radios = [
+	{
+		label: '纯色背景',
+		value: 1,
+
+	},
+	{
+		label: '自定义背景图',
+		value: 2,
+	}
+];
 
 const handleChange = (value, key) => {
 	emit('change', { [key]: value });
@@ -63,8 +100,9 @@ const handleChange = (value, key) => {
 </script>
 
 <style lang="scss">
-$block: vm-basic-TPL-editor;
+$block: vm-basic-tpl-editor;
+
 @include block($block) {
-	
+	// any
 }
 </style>
