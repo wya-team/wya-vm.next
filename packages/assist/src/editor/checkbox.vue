@@ -28,7 +28,7 @@ defineProps({
 		type: Array,
 		default: () => []
 	},
-	value: {
+	modelValue: {
 		type: Array,
 		default: () => []
 	},
@@ -44,7 +44,7 @@ const handleChange = () => {
 	emit('change', currentValue.value);
 };
 watch(
-	() => props.value,
+	() => props.modelValue,
 	(v) => {
 		if (currentValue.value !== v) {
 			currentValue.value = v;
@@ -62,14 +62,18 @@ $block: vm-editor-checkboxes;
 @include block($block) {
 	@include element(group) {
 		display: flex;
+
 		@include element(item) {
 			margin-right: 20px;
+
 			>span:last-child {
 				padding-left: 8px;
 			}
 		}
+
 		@include when(column) {
 			flex-direction: column;
+
 			@include element(item) {
 				margin-bottom: 15px;
 			}

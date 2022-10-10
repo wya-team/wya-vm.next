@@ -17,7 +17,7 @@ import { Input } from '@wya/vc';
 
 const emit = defineEmits(['change', 'update:modelValue']);
 defineProps({
-	value: [String, Number],
+	modelValue: [String, Number],
 	min: {
 		type: Number,
 		default: 0,
@@ -42,7 +42,7 @@ const handleChange = () => {
 	emit('change', currentValue.value);
 };
 watch(
-	() => props.value,
+	() => props.modelValue,
 	(v) => {
 		if (currentValue.value !== v) {
 			currentValue.value = v;
@@ -56,28 +56,30 @@ watch(
 <style lang="scss">
 
 $block: vm-editor-input-number;
-$c54: #5495F6;
+$c54: #5495f6;
 $cb6: #b6b6b6;
 
 @include block($block) {
-	width: 240px;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	width: 240px;
+	padding: 2px;
 	border: 1px solid $cb6;
 	border-radius: 4px;
-	padding: 2px;
+	justify-content: space-between;
+	align-items: center;
+
 	@include element(input) {
 		font-size: 12px;
 		color: #333;
 	}
+
 	> span {
-		flex: 0 0 30px;
 		padding: 0 2px;
-		line-height: 24px;
-		text-align: right;
-		color: #AAAAAA;
 		font-style: 12px;
+		line-height: 24px;
+		color: #aaa;
+		text-align: right;
+		flex: 0 0 30px;
 	}
 }
 </style>

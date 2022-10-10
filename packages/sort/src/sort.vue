@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, ref, onUnmounted } from 'vue';
+import { getCurrentInstance, ref, computed, onUnmounted } from 'vue';
 import { isPassiveSupported, eleInRegExp } from '@wya/vm-shared';
 import { useCurrentDrag } from './shared-hooks';
 
@@ -249,7 +249,7 @@ onUnmounted(() => {
 
 
 defineExpose({
-	index: props.index,
+	index: computed(() => props.index),
 	isHighlight,
 	setActived
 });

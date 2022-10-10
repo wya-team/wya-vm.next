@@ -12,7 +12,7 @@ import { ColorPicker } from '@wya/vc';
 
 const emit = defineEmits(['change', 'update:modelValue']);
 const props = defineProps({
-	color: String,
+	modelValue: String,
 	alpha: {
 		type: Boolean,
 		default: false,
@@ -37,7 +37,7 @@ const handleReset = () => {
 };
 
 watch(
-	() => props.color,
+	() => props.modelValue,
 	(v) => {
 		if (currentValue.value !== v) {
 			currentValue.value = v;
@@ -51,22 +51,24 @@ watch(
 <style lang="scss">
 
 $block: vm-editor-color;
-$c54: #5495F6;
+$c54: #5495f6;
+
 @include block($block) {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	@include element(reset){
-		cursor: pointer;
-		margin-left: 10px;
+
+	@include element(reset) {
 		display: inline-block;
-		padding:2px;
 		width: 30px;
 		height: 32px;
-		line-height: 32px;
-		text-align: center;
-		color: $c54;
+		padding: 2px;
+		margin-left: 10px;
 		font-size: 12px;
+		line-height: 32px;
+		color: $c54;
+		text-align: center;
+		cursor: pointer;
 	}
 }
 </style>
