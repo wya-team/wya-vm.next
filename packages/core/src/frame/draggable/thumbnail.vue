@@ -165,9 +165,11 @@ const repaint = () => {
 };
 
 const operateDOMEvents = (type) => {
-	let fn = type === 'add' 
-		? document.documentElement.addEventListener 
-		: document.documentElement.removeEventListener;
+	let fn = (
+		type === 'add' 
+			? document.documentElement.addEventListener 
+			: document.documentElement.removeEventListener
+	).bind(document.documentElement);
 
 	fn('mouseup', handleMouseUp);
 	fn('mousemove', handleMouseMove);

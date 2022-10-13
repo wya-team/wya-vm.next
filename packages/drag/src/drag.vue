@@ -336,7 +336,7 @@ const calculation = () => {
 };
 
 const operateDOMEvents = (type) => {
-	let fn = type === 'add' ? doc.addEventListener : doc.removeEventListener;
+	let fn = (type === 'add' ? doc.addEventListener : doc.removeEventListener).bind(doc);
 
 	// 使用原生绑定 不区分移动端还是桌面端
 	draggableEvents.start.forEach(eventName => {

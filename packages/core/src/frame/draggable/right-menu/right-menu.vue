@@ -71,9 +71,11 @@ const handleClick = (item) => {
 };
 
 const operateDOMEvents = (type) => {
-	let fn = type === 'add'
-		? document.documentElement.addEventListener
-		: document.documentElement.removeEventListener;
+	let fn = (
+		type === 'add'
+			? document.documentElement.addEventListener
+			: document.documentElement.removeEventListener
+	).bind(document.documentElement);
 
 	fn('click', handleDeselect);
 };
@@ -96,7 +98,7 @@ onMounted(() => {
 onUnmounted(() => {
 	operateDOMEvents('remove');
 });
-</script>
+</script>f
 <style lang="scss">
 .vm-right-menu {
 	position: fixed;

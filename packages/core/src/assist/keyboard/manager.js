@@ -6,7 +6,7 @@ import { Logger, IS_SERVER } from '@wya/vm-shared';
  * 后期集成: https://github.com/wya-team/wya-keyboard
  */
 const doc = !IS_SERVER && document.documentElement;
-const getEventFn = (type, el) => (type === 'add' ? el.addEventListener : el.removeEventListener);
+const getEventFn = (type, el) => ((type === 'add' ? el.addEventListener : el.removeEventListener).bind(el));
 
 class Keyboard {
 	constructor(combo) {

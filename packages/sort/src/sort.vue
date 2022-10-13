@@ -126,7 +126,7 @@ const highlight = ref(null);
 const eventOpts = !isPassiveSupported || { capture: true, passive: true };
 
 const operateDOMEvents = (type) => {
-	let fn = type === 'add' ? doc.addEventListener : doc.removeEventListener;
+	let fn = (type === 'add' ? doc.addEventListener : doc.removeEventListener).bind(doc);
 
 	fn('mousedown', handleDeselect, eventOpts);
 };
