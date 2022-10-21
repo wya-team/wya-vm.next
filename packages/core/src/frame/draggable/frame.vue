@@ -20,7 +20,7 @@
 		@client-resize="handleClientResize" 
 	>
 		<template #content>
-			<div 
+			<Scroller 
 				ref="wrapper" 
 				class="vm-frame-draggable__wrapper" 
 				:style="wrapperStyle"
@@ -110,7 +110,7 @@
 						<slot name="frame-footer" />
 					</div>
 				</div>
-			</div>
+			</Scroller>
 		</template>
 		<template #content-extra>
 			<Thumbnail
@@ -151,6 +151,7 @@
 import { ref, nextTick, computed, getCurrentInstance } from 'vue';
 import { Drag } from '@wya/vm-drag';
 import { Logger } from '@wya/vm-shared';
+import { Scroller } from '@wya/vc';
 import GridLines from './grid-lines.vue';
 import AlignLines from './align-lines.vue';
 import Inner from './inner.vue';
@@ -236,8 +237,8 @@ const clientH = ref(0);
 // 参考线
 const guides = ref([], []);
 
-// 悬浮的滚动条为0
-const scrollerSize = ref(4);
+// 悬浮的滚动条为0, 如果不使用vc-scroller，需要额外设置
+const scrollerSize = ref(0);
 
 // 四周留白
 const borderSize = computed(() => {
@@ -354,12 +355,11 @@ const handleScroll = (e) => {
 };
 
 const handleScrollThumbnail = (x, y) => {
-
 	scrollLeft.value = x;
-	wrapper.value.scrollLeft = x;
+	wrapper.value.setScrollLeft(x);
 
 	scrollTop.value = y;
-	wrapper.value.scrollTop = y;
+	wrapper.value.setScrollTop(y);
 };
 
 const handleDrop = (e) => {
@@ -886,9 +886,12 @@ $block: vm-frame-draggable;
 @include block($block) {
 	@include element(wrapper) {
 		height: 100%; /* 兼容无ruler模式 */
-		overflow: auto; /* hidden时考虑使用悬浮的滚动条 */
 
-		@include scroller();
+		/* overflow: auto; */
+
+		/* hidden时考虑使用悬浮的滚动条 */
+
+		/* @include scroller(); */
 	}
 
 	@include element(content) {

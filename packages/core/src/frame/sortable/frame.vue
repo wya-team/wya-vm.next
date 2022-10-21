@@ -2,7 +2,7 @@
 	<Inner :has-page="hasPage" class="vm-frame-sortable">
 		<template #content>
 			<slot name="frame-header" />
-			<div 
+			<Scroller 
 				:style="[style, frameStyle]" 
 				class="vm-frame-sortable__wrapper"
 				@scroll="handleScroll"
@@ -41,7 +41,7 @@
 						<div v-if="it.placeholder" :style="{height: `${it.placeholder}px`}" />
 					</div>
 				</transition-group>
-			</div>
+			</Scroller>
 			<slot name="frame-footer" />
 		</template>
 	</Inner>
@@ -50,6 +50,7 @@
 <script setup>
 import { ref, onUnmounted, nextTick, computed, getCurrentInstance } from 'vue';
 import { Sort } from '@wya/vm-sort';
+import { Scroller } from '@wya/vc';
 import Inner from './inner.vue';
 import { getUid, cloneDeep } from '../../utils/helper';
 import { SORT_IN_FRAME, WIDGET_TO_FRAME, PAGE_MOULE } from '../../utils/constants';
@@ -268,7 +269,8 @@ $block: vm-frame-sortable;
 	@include element(wrapper) {
 		/* margin-left: 20px; */
 		position: relative;
-		overflow: auto;
+
+		/* overflow: auto; */
 		border: 1px solid $border;
 		flex-shrink: 0;
 
