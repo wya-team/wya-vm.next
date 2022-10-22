@@ -871,10 +871,12 @@ const handleEnd = (original, it, index) => {
 };
 
 defineExpose({
-	el: instance.vnode.el,
+	el: instance.vnode.el, // TODO: -> func
 	setActived,
 	setActivedById,
-	handleDrop
+	handleDrop,
+	scrollLeft,
+	scrollTop
 });
 </script>
 

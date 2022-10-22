@@ -24,7 +24,7 @@
 				:frame-w="dataSource.frameW"
 				:frame-h="dataSource.frameH"
 				:width="dataSource.frameW"
-				:height="dataSource.frameH"
+				:height="dataSource.frameH > 500 ? 500 : dataSource.frameH"
 				:show-widget="false"
 				:show-editor="false"
 				:show-lines="false"
@@ -89,7 +89,7 @@
 	</Modal>
 </template>
 <script setup>
-import { watch, onMounted, ref } from 'vue';
+import { watch, onMounted, ref, getCurrentInstance } from 'vue';
 import { Button, Modal, Dropdown, Icon } from '@wya/vc';
 import { Combo } from '@wya/vm-core';
 import { Widget } from '@wya/vm-widget';
@@ -116,6 +116,7 @@ const page = ref([
 	}
 ]);
 
+const instance = getCurrentInstance();
 const handleSelect = (value, item) => {
 	let it = page.value.find(i => i.value == value);
 	item.route = `/${it.value}`;
@@ -127,7 +128,12 @@ const handleDelete = (index) => {
 };
 
 const handleAdd = () => {
-	combo.value.add('paint');
+	const id = combo.value.add('paint');
+	combo.value.update({
+		id,
+		x: instance.vnode.el.querySelector('.vm-frame-draggable__wrapper').scrollLeft,
+		y: instance.vnode.el.querySelector('.vm-frame-draggable__wrapper').scrollTop
+	});
 };
 
 const handleOk = () => {
