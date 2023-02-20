@@ -1,14 +1,14 @@
 {
   "name": "@wya/vm",
-  "version": "3.0.21",
+  "version": "3.0.22",
   "main": "dist/index.js",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@wya/vm-assist": "^1.0.8",
-    "@wya/vm-core": "^1.0.18",
+    "@wya/vm-assist": "^1.0.9",
+    "@wya/vm-core": "^1.0.19",
     "@wya/vm-drag": "^1.0.2",
     "@wya/vm-sort": "^1.0.4",
     "@wya/vm-widget": "^1.0.1"
