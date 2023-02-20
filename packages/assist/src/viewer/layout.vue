@@ -1,6 +1,6 @@
 <template>
-	<div class="vm-viewer-layout" :style="wrapperStyle">
-		<div :style="contentStyle">
+	<div class="vm-viewer-layout" :style="wrapperStyle$">
+		<div :style="contentStyle$">
 			<slot />
 		</div>
 	</div>
@@ -20,11 +20,11 @@ const props = defineProps({
 		type: [Boolean, Number],
 		default: false
 	},
-	wrapper: {
+	wrapperStyle: {
 		type: [String, Array, Object],
 		default: ''
 	},
-	content: {
+	contentStyle: {
 		type: [String, Array, Object],
 		default: ''
 	}
@@ -38,8 +38,8 @@ const currentInner = computed(() => {
 	return $$inner || $inner || inner;
 });
 
-const wrapperStyle = computed(() => {
-	if (props.wrapper) return props.wrapper;
+const wrapperStyle$ = computed(() => {
+	if (props.wrapperStyle) return props.wrapperStyle;
 	let { backgroundColor, paddingVertical, paddingHorizontal, borderRadius } = selfAttrs.value;
 	let { 
 		backgroundColor: $backgroundColor, 
@@ -60,8 +60,8 @@ const wrapperStyle = computed(() => {
 	};
 });
 
-const contentStyle = computed(() => {
-	if (props.content) return props.content;
+const contentStyle$ = computed(() => {
+	if (props.contentStyle) return props.contentStyle;
 	let { backgroundType, backgroundColor, backgroundImage, backgroundSize, borderRadius } = selfAttrs.value;
 	let { 
 		backgroundColor: $backgroundColor, 
